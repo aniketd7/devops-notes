@@ -1,0 +1,122 @@
+What is waterfall model..
+This is the traditional s/w building practice 
+1. Gather Requirements
+2. Design the s/w (Architecture)
+3. Implemntation (building s/w or coding)
+4. Verification
+5. Deployment
+As the problem in this model is normally clients requirement gets change in almost everydays
+And client have not get any idea regaring the s/w in the middle. after building whole s/w after that only 
+client get to see the s/w. and if client requests for changes it gets difficult to change or it will get impact
+to whole s/w even if for small changes.
+
+What is Agile Methodology..?
+It is a chain of rapid development and requirment
+
+so here the 1st section of your s/w development is planning part.
+Now we know what we are building . so we breakdown the application in small chunks of code. and we start building 
+that chunks one at a time 
+1. plan 
+2. design (architecure)
+3. develop
+4. test
+5. deploy
+6. review
+7. launch
+Here suppose we start devide the whole s/w in small chunks and in 1st chunks we start working on login page.
+so we plan then we design then we start devloping the page once complete we test it and then we deploy on the stage server
+once we  deploy the code we inform client to se the updates. if he satisfied then we launch. if client need some changes 
+we can easily make the changes then again we design -> develop -> test -> deploy -> review 
+In this we dont launch the till the client satisfaction.
+Once client satisfied then we use another chunk of s/w 
+Likewise we work on iteration like 1st chunk 2nd chunk etc
+
+Here the main benifits is 
+- satisfy the client
+- welcome change requirement
+- delivered working s/w frequnetly
+
+Implementation of Agile
+there are muiltiple frameworks to implement agile.
+like - scrum, kanban, lean, crystal, eXtreme Progarmming (XP)
+
+
+What is Scrum...???
+It is iterative philosophy.
+So its iteration of plan , build,test and review as mentioned above.
+So Scrum implemented team contain
+1. Product Owner
+You can think a product owner as a "Manager"  OR BA
+he is the person who holds the responsiblility to deploy the application as an when commited.
+and the application is build exactly the way it has to be built.
+This is the person with the idea, he might not need a technical person, he might be a guy from managment
+he does not necessary to now about the devlopment or other technality 
+he is the guy with the idea and the owner of the application that would be develop.
+so accountability lies on him.
+
+2. Scrum Master
+It might be same as team leader
+
+3. Team 
+which contain developer, tester
+
+below are some terms in scrum
+
+- Product Backlog
+
+As i have mentioned we use iterative method and we divide whole project into smaller chunks.
+for ex suppose we are building a s/w amazon.in
+so, instead of building whole s/w we will divide this prokject in smaller chunks
+so lets assume we divided into 3 parts 
+1st frontend
+2nd Email Notification
+3rd payment
+so in all parts we do all the phases like plan, design, develop,test & review
+so all these 3 things are product backlogs
+these are the things which are suppose to be done over a period of time.
+so 1st thing we do to deploying a product backlog 
+Product owner or scrum master will be responsible for creating product backlog
+
+- User Stories
+
+Once we have product backlogs then we have user stories
+so this backlogs will now reffered to as user stories.
+suppose 10 or 20 more backlogs same as i mentioned above like cart, login etc.
+so scrum master or product owner would prioritize the user strories that we have
+and depending on the priority has been set they come up with "Sprint backlog"
+
+- Sprint Backlog
+In this the development team is actually involve in this.
+Now we have organise and prioritize user stories that you (Team) are supposed to working on.
+so 10 different things are not dumped on you at the same time
+you have given logical and resonable task that have to be executed one at a time
+
+Once you have sprint backlog you actually start working on it
+
+- Sprint Planning
+ (this is the fancy name for meeting and discussion)
+ in this product owner will expain how he imagine a end goal of this product or s/w will look like.
+
+- Daily scrum (Daily Standup meeting)
+It is the 15 mins meeting will happes on every day with developer, tester and any other members will have in the team
+in this we discuss what hapand, where are we now, if we need any help, what we are going to today
+
+- Sprint review 
+this occure at the end of user stroy or the backlog you would be working on.
+so each an every user story usually designed with the time line of 2 weeks in mind.
+its may vary depending on company. it could be 2 to 4 weeks but mejority of cases each sprint will be of 2 weeks
+ 
+- Burn Down Chat
+depending on this graph scrum master or product owner will come to know how team is working on sprint
+and whether team is working on time or not.
+
+- velocity / story point
+this is the no. how complex our user stories are. so scrum master or project owner will ask team 
+and get the velocity  or stroy points of each user stories
+depending on the complexity each team member will give a number 1 or 3 or 5 or 7 
+higher the number more complex.
+we can take muiltiple user stories in one sprint depending upon the story point. and each sprint will be of 7 to 14 days generally.
+
+So here amazon the whole s/w or project is "EPIC"
+In Product Backlog each task is called "User Stories"
+
