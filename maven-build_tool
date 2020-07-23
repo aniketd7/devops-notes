@@ -1,0 +1,271 @@
+- Maven is apache product
+-------------------------
+Imp terms used in maven
+-------------------------
+- artifacts : means your o/p file. can generate deployable artifact (jar, war, ear) from source code
+
+- pom.xml : Project Object Model
+			We can have more than 1 pom file. 
+			for ex. for each small module inside 1 complete project we can have seperate pom file.
+			So for 1 complete project we have 1 parent pom.xml and for each module we have another pom.xml called child pom.xml
+
+- Local repo : .m2 directory in home dir where maven is installed. this contains all the dependancies of maven or any maven related
+				proeject.
+
+- Remote repo- If maven doesn't found any dependancy in local repo then it will check on remote repo.
+				default is the maven official site (we can change if we want to)
+				Default remote repo: https://repo1.maven.org/maven2
+				suppose if we want to setup custom remote repo then we will set up one server and keep all the packages in this server
+				so when maven doesnt found dependancy packages in local repo it connects to this custom remote repo and from here 
+				it download the dependancy.
+
+- GAV - Project co-ordinates : this means a unique identificationn which need to mentioned in pom.xml
+		this GAV we used to uniquely identified project. which is mentiond in pom.xml and unique for every project.
+		Group-Artifacts-Version (GAV)
+		Group - our project is comes in which group (we can give anything like IT or banking depneds on us.)
+		Artifact - i.e. project name whihch means what we want to create ex. ecommerce site like amazon so we can give amazon 
+						(we can give anything)  
+		Version - version of build ex. 1.1
+there are 2 types of version
+1 - Release - final product of that version (after that we will not change in that)
+2 - Snapshot - we can change the content of the data after snapshot
+
+Now suppose this custom remote repo will also don't have any packages then it creates the defult repo (maven official repo)
+and download it in custom remote repo.
+we  can mention this custom remote repo url in "settings.xml" file
+--------
+Working:
+--------
+When we create any maven project it will give pom.xml files with some other files like (src, main, target dir)
+wehn we running any maven project or creating any build 
+ its checks the pom.xml 
+this file give the dependancy of your project or build
+suppoes we have lot of files in a project and we want to create a single file then using pom.xml it creats the build.
+
+When we trigger the build 
+1 it check the pom.xml file 
+	it finds the dependancy related to that project or build
+2. if dependancy is already exist in local repo (.m2 repo) then its simply creates a build.
+3. if not then it download from remote repo and clone it to local repo
+4.then creates the build.
+5. It gets store in "target" folder
+
+----------------------
+Maven Build LifeCycle
+----------------------
+Main 3 lifecycle phases
+1. Default : default contains below 6 phases
+			(validate --> compile --> test --> package --> install --> deploy)
+2. Clean : cleans the build
+3. Site : generate information about your whole project.
+
+1. Default:
+	this contain project building and deployment
+- Validate - this will check all the dependancy related to the build.
+			 this dependancy mentioned in pom.xml so it refers this file
+			 
+- Compile - this will compile the build. compile the source code in src folder
+
+- Test - now this will test the build (unit testing) as per mentioned unit test cases.
+		 this will test the build mentiond in test folder
+
+- Package- this will create a package of build. i.e. create a single file like jar or war etc
+
+- Install - copy artifact into traget dir as well as local repo (.m2)
+
+- Deploy - used to copy artifact into traget dir as well as local repo (.m2) and in remote repo (jfrog). 
+
+2. Clean
+	this handles project cleaning (remove jar or war files)
+	
+3. Site
+	this handles project site generation.
+	i.e. this will maintain project documents. how many modules are there, what are the dependancy
+	which module is dependant on which module, which modules are install in this project.
+	
+
+Archetype: this is project template in which you want to build your project.
+		   for ex. if we are creating build then what type of artifact you want 
+			like jar, war etc so depending on that we need to select that template.
+
+-------------------------
+Installation of MAVEN
+-------------------------
+
+prerequisits: java should be install on machine.
+
+To install mvn download the maven package from official website
+extract file 
+set maven home path 
+and check mvn --version
+
+Now create one dir anywhere inside we will keep all the project inside this dir.
+for ex: maven_project
+now go to this dir
+
+1. mvn archetype:generate
+	this cmd will genereate 1 template to build project. if we want to build for web project we will select war template
+	when we run this cmd it will create local repo(.m2) in home dir and download require modules and packages.
+	and then it select default template, if we want we can give different template by giving its number.
+	then it ask for groupid - for ex. demo1
+	then it ask for artifact - means project name - for ex. amazon
+	then it ask for version - you can simply hit enter or give any specific version
+	then it ask for package - here also we hit enter 
+once done, then if you notice under maven_project (we had created this folder to keep all projects or build under this dir)
+one folder gets created as per our artifact id (i.e. amazon)
+under this as per our template dir structure gets created (like if we select jar file or war file template then depending upon this
+template some dir and pom file gets created.)
+
+2. mvn validate
+	we need to goto inside the project which we have created using above cmd (i.e amazon)
+	then need to run "mvn validate" cmd
+	this will check pom.xml file in this file GAV and all dependancies are mentioned.
+	so validate will check this dependancy from local repo and remote repo if not available.
+
+If we select default template  i.e. sample maven project then the default dir structure is 
+there are 1 file pom.xml and src folder
+in scr folder - 2 folders 
+a. main - this contain all your java files 
+		 so in main file we will keep all the project related files
+b. test - this contain testing files like test cases for unit testing 
+		 so in test file we will keep unit testing related files
+
+3. mvn compile
+	this will download all the dependancy and complie our project . i.e all the files inside src folder maven will compile and keep that files under
+	"target" folder.
+in target --> classes folder you can see all the complie files.
+Remeber: default java files extensions is ".java" when developer writes a java code that file extension is .java
+when we complie the java files then that files extension is ".class"
+them using class file we create jar file or war file.
+
+4. mvn test
+    Normally developer write some test cases depending on our project to check the new development is done and its working fine or not
+    so this test cases are kept under "test" folder.
+    mvn test will download all the depndency related to testing and run this test cases. 
+    so that compile test cases it will keep under target --> test-classes directory 
+    
+5. mvn package
+	this will create a artifact (i.e o/p file i.e jar or war file) from the class file. 
+	once you run the command it will create final o/p (articact) file which is .jar or .war depending upon the template we have selected.
+
+6. mvn install
+	when we run package command that time artifact (jar,war) file gets store in target dir only. But when we run install cmd that time it 
+	also store that artifact in local repo. (i.e it will store artifact in both location target folder and local repo).
+	so when we require this in local repo ?
+	suppose muiltiple developers working on different modules or project. for ex: mod1 and mod2 
+	now suppose mod2 is dependent on mod1.i.e to sucessfully build mod2 it requires mod1 to be in its local repo (i.e mod2 repo .m2)
+	and in package cmd it only creates artifact (jar, war) in respective projects only. 
+	i.e mod1 artifact will be in mod1 target dir amd mod2 artifact will be on mod2 target dir
+	so using install it also copies in local repo. so for all projects it will be accessible.
+	 
+8. mvn clean
+	this is used to clean rhe build. so target folder and war, jar file will gets remove. if we again want artifact (i.e o/p file or jar or war)
+	file then we need to perfom all the steps like validate,compile,test,package
+	
+--------------------------------------------------------------------------------------------------
+Dependancy module on same machine (i.e both mod1 and mod2 will be one single developers machine.)
+--------------------------------------------------------------------------------------------------
+Suppose in 1 project say amazon, you have 2 small task or module say mod1 and mod2
+so inside amazon there is parent pom.xml and mod1, mod2 folder is there.
+inside mod1 and mod 2 we have src and child pom.xml
+so insdie mod1 and mod2 child pom.xml we will change GAV values like
+
+Mod1 pom.xml
+group id - demo1 (unchanged)
+artifact id - mod1 (changed)
+name - mod1 (this tag also we will change to mod 1)
+
+Mod2 pom.xml
+group id - demo 1 (remian same)
+artifact id - mod2 (changed)
+name - mod2 (this tag also we will change to mod 2)
+
+Now if we run mvn package cmd inside mod1 and mod2 then we will get 2 seperate aritifact mod1.jar and mod2.jar inside target dir.
+
+Now suppose we want to add mod2 is dependant on mod1
+then, inside mod2 child pom.xml we will mention GAV of mod1(which is present under mod1 pom.xml). 
+and provide this dependancy in <dependancy> tag inside <dependancies> tag under mod2 pom.xml
+	<dependency>
+      <groupId>demo1</groupId>
+      <artifactId>mod1</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+Now if we build mod2 using package cmd it will give error that build faild due to dependancy not found.
+This issue occured bcos when we build mod2 it will check dependancy in local repo. and inide local repo there is 
+no mod1 artifact (mod1.jar)
+so we need to run mod1 using "mvn install" cmd so it will create artifact and keep that into target folder as well 
+as into local repo.
+
+After running the mod1 using install cmd if we again build mod2 using package or using install cmd it will build successfully.
+
+Now here we have one limitation that we need to 1st build mod1 then mod2 manually. so depending upon the no. of project or module 
+we have inside main project that no. of time we need to build each module.
+Instead of that, we can run parent project (i.e amazon1 in this example) and that will run all the child project or module (i.e mod1 & mod2)
+
+To do so,
+we need to mention 
+A. parent module to child:
+		in parent (amazon1) pom.xml we will give information of mod1 and mod2
+
+B. child module to parent:
+		in mod1 and mod2 pom.xml we will give parent (amazon1) info
+
+A. In parent(amazon1) pom.xml we will add below thing below GAV tags.
+
+<packaging>pom</packaging>
+<modules>
+	<module>mod1</module>
+	<module>mod2</module>
+</modules>
+
+This above packaging tag will tell maven not to create package of this parent (amazon1) just refer this pom.xml to create 
+build of child (mod1,mod2) . 
+In module tag we need to inform our child module or project. 
+
+B. In child module(mod1,mod2) pom.xml we will add parent GAV
+mod1 pom.xml
+<parent>
+	<groupId>demo1</groupId>
+    <artifactId>amazon1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</parent>
+
+mod2 pom.xml
+<parent>
+	<groupId>demo1</groupId>
+    <artifactId>amazon1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</parent>
+
+Now we will build parent pom.xml using "mvn install"
+this will create a artifact and keep in target as well as in local repo.
+
+--------------------------------------------------------------------------------------------------
+Dependancy module on different machine (i.e mod1 and mod2 will be on different developers machine.)
+--------------------------------------------------------------------------------------------------
+steps are same as both module on same machine, but the only difference is. we set here custom remote repo.
+called artifectory. JFrog is the name of artifactory tool.
+
+So, here we will setup jfrog to keep all the modules, dependancy etc in remote server.
+and mentioned this url in our maven settings.xml file.
+so now if on any developers local repo (.m2) if some dependancy is missing then it will download from this
+artifactiry (jfrog) and if jfrog don't have dependancy then it will fetch from default remote repo (i.e maven official repo)
+
+.m2 --> jfrog --> maven remote repo
+
+"mvn deploy" 
+when we run this command then it will create a artifact (jar,war) and it will copy in target folder then in local repo and
+in remote repo (jfrog) also.
+
+so now if mod1 in devleoper1 machine and mod2 in developer2 machine and mod2 have dependancy of mod1 
+(i.e. to build mod2 it requires mod1 artifact)
+so if we run "mvn install" cmd on developer1 machine then it will create a build on target dir and local repo (.m2)
+and suppose if developer2 try to build mod2 it will fail bcos it checks for dependancy and will not found in .m2
+so it will check for remote repo there also it will not find mod1 artifact
+
+For this reason we use "mvn deploy" cmd
+so now when we build mod1 on developer1 using deploy this will keep the artifact (war,jar) on target, local repo (developer1 .m2 dir)
+and on remote repo (jfrog)
+so now when developer2 will build mod2 on developer2 machine, it will check for local repo (developer2 .m2 dir) but it will not found
+then it will check on remote repo (artifactory i.e. jfrog) and here it will found mod1 jar or war file and build will run successful.
